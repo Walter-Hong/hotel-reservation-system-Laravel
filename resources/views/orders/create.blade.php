@@ -17,7 +17,7 @@
             </div>
             <div class="price">
                 <div class="inner" style="width: 73px;">
-                    €{{ $room->price * $room->discount / 10 }} <span>per night</span>
+                    £{{ $room->price * (100 -$room->discount )/100 }} <span>per night</span>
                 </div>
             </div>
         </div>
@@ -38,10 +38,13 @@
                                     {!! csrf_field() !!}
                                     <input type="hidden" name="no" value="{{ $room->no }}">
                                     <div class="form-group">
-                                        <label for="no">Room INFO</label>
+                                        <label for="no">Room Info</label>
                                         <p>No:{{ $room->no }} -{{ $room->type->name }} <br>
-                                            € {{ $room->price * $room->discount / 10 }}
-                                            <span style="text-decoration:line-through;">{{ $room->price}}</span>
+                                            £ {{ $room->price * (100 -$room->discount )/100 }}
+
+                                            @if($room->discount != 0)
+                                                <span style="text-decoration:line-through !important;">{{ $room->price}}</span>
+                                            @endif
                                             <span>/ night</span>
                                         </p>
                                     </div>
@@ -102,7 +105,8 @@
                 <div class="col-sm-8">
                     <div class="table-responsive">
                         <table class="table">
-                            <caption style="text-align: center"><h1>Current Reservation({{ count($room->orders) }})</h1></caption>
+                            <caption style="text-align: center"><h1>Current Reservation({{ count($room->orders) }})</h1>
+                            </caption>
                             <thead>
                             <tr>
                                 <th>user</th>

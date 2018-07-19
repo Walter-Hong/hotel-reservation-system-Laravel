@@ -57,7 +57,6 @@
 
     <!-- ========== NOTIFICATION ========== -->
     <div id="notification">
-        @include('flashy::message')
     </div>
 
     {{--@include('layouts.partial.footer')--}}
@@ -83,6 +82,7 @@
 <script src="{{ asset('app/js/jquery.countdown.min.js') }}"></script>
 <script src="{{ asset('app/js/main.js') }}"></script>
 
+@include('flashy::message')
 
 @yield('script')
 </body>

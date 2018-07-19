@@ -30,22 +30,22 @@ class ProfileController extends Controller
         }
 
         $this->validate($request, $rules, [], [
-            'name' => '用户名',
-            'password' => '密码|min:6',
-            'old_password' => '当前密码'
+            'name' => 'username',
+            'password' => 'password|min:6',
+            'old_password' => 'currentpassword'
         ]);
 
         $user = Auth::user();
         $user->name = $request->get('name');
         if (count($rules) == 1) {
             $user->save();
-            flashy()->success('修改成功');
+            flashy()->success('success');
             return back();
         } else {
             $user->password = Hash::make($request->get('password'));
             $user->save();
             Auth::logout();
-            flashy()->success('修改成功, 请重新登录');
+            flashy()->success('change success,please login again');
             return redirect('/login');
         }
     }

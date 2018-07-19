@@ -1,7 +1,7 @@
 @extends('admin.app')
 
 @section('title')
-    后台管理-房间分类修改
+    management-modify room type
 @stop
 
 @section('page')

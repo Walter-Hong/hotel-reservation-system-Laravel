@@ -6,12 +6,24 @@ use App\Models\Order;
 use App\Models\Room;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
     public function __construct()
     {
-         $this->middleware('auth');
+        $this->middleware('auth');
+    }
+
+    public function index()
+    {
+        $orders = Order::where('user_id', Auth::user()->id)
+            ->with(['room' => function ($query) {
+                return $query->with('type');
+            }])->orderBy('check_in_at', 'DESC')
+            ->paginate(12);
+
+        return view('orders.list', compact('orders'));
     }
 
     public function create($no)
@@ -41,14 +53,15 @@ class OrderController extends Controller
         ]);
 
         Order::create([
-            'room_no'      => $request->get('no'),
+            'room_no' => $request->get('no'),
             'phone' => $request->get('phone'),
             'name' => $request->get('name'),
+            'user_id' => Auth::user()->id,
             'check_in_at' => Carbon::parse($request->get('check_in_at')),
             'check_out_at' => Carbon::parse($request->get('check_out_at')),
         ]);
 
-        flashy()->success('预约成功', '#');
+        flashy()->success('book success', '#');
 
         return redirect('/');
     }

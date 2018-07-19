@@ -4,6 +4,13 @@
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+
+    <meta>
+    <!-- ADD PAGE SPECIFIC META -->
+    @yield('meta')
+
+    </meta>
+
     <!-- ========== SEO ========== -->
     <title>@yield('title') | {{ $setting->company }}</title>
     <meta content="" name="description">

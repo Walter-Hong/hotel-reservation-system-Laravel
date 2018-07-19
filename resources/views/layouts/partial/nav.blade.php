@@ -8,7 +8,7 @@
         <ul class="top_menu_right">
             <li><i class="fa  fa-phone"></i><a href="tel:18475555555"> 1-888-123-4567 </a></li>
             <li class="email"><i class="fa  fa-envelope-o "></i>
-                <a href="mailto:contact@site.com">water@site .com</a>
+                <a href="mailto:contact@site.com">Sunny Beach</a>
             </li>
             <li class="language-switcher">
                 <nav class="dropdown">
@@ -48,9 +48,33 @@
         <nav id="main_menu" class="mobile_menu navbar-collapse">
             <ul class="nav navbar-nav">
                 <li><a href="{{ route('index') }}">HOME</a></li>
-                <li><a href="{{ route('rooms.index') }}">LIST</a></li>
-                @if (Auth::user()->is_admin)
-                    <li><a href="{{ url('admin') }}">Admin</a></li>
+                <li><a href="{{ route('rooms.index') }}">ROOM LIST</a></li>
+                @if (Auth::check())
+                    @if (!Auth::user()->is_admin)
+                    <li>
+                        <a href="{{ route('orders.index') }}"></i> MY ORDERS</a>
+                    </li>
+                    @endif
+                    <li>
+                        <a href="{{ route('profile') }}"></i> PROFILE</a>
+                    </li>
+                    @if (Auth::user()->is_admin)
+                        <li>
+                            <a href="{{ url('admin') }}"><i class="fa fa-dashboard fa-fw"></i> ADMIN</a>
+                        </li>
+                    @endif
+                    <li class="divider"></li>
+                    <li>
+                        <a href="{{ url('logout') }}"><i class="fa fa-sign-out fa-fw"></i> LOGOUT</a>
+                    </li>
+                @else
+
+                    <li class="{{ isActive('login') }}">
+                        <a href="{{ url('login') }}">LOGIN</a>
+                    </li>
+                    <li class="{{ isActive('register') }}">
+                        <a href="{{ url('register') }}">REGISTER</a>
+                    </li>
                 @endif
             </ul>
         </nav>

@@ -12,7 +12,8 @@ class Order extends Model
         'name',
         'check_in_at',
         'check_out_at',
-        'status'
+        'status',
+        'user_id'
     ];
 
     protected $dates = ['check_in_at', 'check_out_at'];
@@ -25,13 +26,17 @@ class Order extends Model
     {
         return $this->belongsTo('App\Models\Room', 'room_no', 'no');
     }
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', 'user_id', 'id');
+    }
 
     public static function getIncoming($orders = null)
     {
         $orders = $orders ?: self::with('room')->get();
 
         return $orders->reduce(function ($incoming, $order) {
-            return $incoming += $order->room->price * $order->getStayDays();
+            return $incoming + $order->room->price * $order->getStayDays();
         }, 0);
     }
 

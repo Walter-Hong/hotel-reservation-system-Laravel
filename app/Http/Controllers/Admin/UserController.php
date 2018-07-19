@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\User;
-use App\Http\Requests;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -14,9 +13,12 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $users = User::paginate(15);
+
+        if ($keyword = $request->get('keyword'))
+            $users = User::whereRaw("concat(`name`,`email`) like '%" . $keyword . "%'")->paginate(15);
 
         return view('admin.users.index', compact('users'));
     }
@@ -34,7 +36,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -45,7 +47,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -56,7 +58,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -67,8 +69,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -79,7 +81,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -90,8 +92,22 @@ class UserController extends Controller
             $user->delete();
         }
 
-        flashy()->success('删除成功', '#');
+        flashy()->success('success', '#');
 
         return back();
+    }
+
+
+    public function search(Request $request)
+    {
+        $users = User::paginate(15);
+
+        if ($keyword = $request->get('keyword'))
+            $users = User::whereRaw("concat(`name`,`email`) like '%" . $keyword . "%'")->paginate(15);
+
+
+        $users = $users->paginate(15);
+
+        return view('admin.users.index', compact('users'));
     }
 }

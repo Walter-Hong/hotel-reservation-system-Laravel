@@ -1,24 +1,24 @@
 @extends('admin.app')
 
 @section('title')
-    查询结果
+    searchresult
 @stop
 
 @section('page')
     <div class="row">
         <div class="alert alert-success">
-            <p>总收入 {{ getIncoming($orders) }} 元</p>
+            <p>totalincome {{ getIncoming($orders) }} pound</p>
         </div>
 
         <div class="col-sm-8 col-sm-offset-2">
-            <h1 class="page-header">历史订单({{ count($orders) }})</h1>
+            <h1 class="page-header">history order({{ count($orders) }})</h1>
             @if (count($orders))
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <b>用户</b>
-                        <b>房间号</b>
-                        <b>预约日期</b>
-                        <b>退房日期</b>
+                        <b>user</b>
+                        <b>roomnumber</b>
+                        <b>bookingtime</b>
+                        <b>departuretime</b>
                     </li>
                     @foreach ($orders as $order)
                         <li class="list-group-item">
@@ -34,7 +34,7 @@
                     @endforeach
                 </ul>
             @else
-                <p>暂时没有</p>
+                <p>no available </p>
             @endif
         </div>
     </div>

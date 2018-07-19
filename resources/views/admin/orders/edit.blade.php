@@ -1,12 +1,12 @@
 @extends('admin.app')
 
 @section('title')
-    后台管理-修改入住状态
+     managemen-modify status
 @stop
 
 @section('page')
     <div class="row">
-        <h3 class="page-header">修改{{ $order->id }}房间</h3>
+        <h3 class="page-header">edit order {{ $order->id }} status</h3>
 
         <form action="{{ route('admin.orders.update', ['id' => $order->id]) }}" method="POST">
             {!! csrf_field() !!}
@@ -14,12 +14,12 @@
 
             <div class="form-group">
                 <select name="order_status" id="order_status" class="form-control">
-                    <option value="1">未入住</option>
-                    <option value="2">正入住</option>
-                    <option value="3">已退房</option>
+                    <option value="1">prepare</option>
+                    <option value="2">using</option>
+                    <option value="3">finish</option>
                 </select>
             </div>
-            <input type="submit" value="确认" class="btn btn-primary">
+            <input type="submit" value="save" class="btn btn-primary">
         </form>
     </div>
 @stop

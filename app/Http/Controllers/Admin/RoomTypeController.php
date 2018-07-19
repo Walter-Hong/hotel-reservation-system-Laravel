@@ -41,12 +41,12 @@ class RoomTypeController extends Controller
         $this->validate($request, [
             'name' => 'required|unique:room_types,name'
         ], [], [
-            'name' => '分类名称'
+            'name' => 'typename'
         ]);
 
         RoomType::create($request->all());
 
-        flashy()->success('添加成功', '#');
+        flashy()->success('success', '#');
 
         return redirect(route('admin.rooms.types.index'));
     }
@@ -87,7 +87,7 @@ class RoomTypeController extends Controller
         $this->validate($request, [
             'name' => 'required|unique:room_types,name,' . $id
         ], [], [
-            'name' => '分类名称'
+            'name' => 'typename'
         ]);
 
         $type = RoomType::findOrFail($id);
@@ -95,7 +95,7 @@ class RoomTypeController extends Controller
         $type = RoomType::findOrFail($id);
         $type->update($request->all());
 
-        flashy()->success('修改成功', '#');
+        flashy()->success('success', '#');
 
         return redirect(route('admin.rooms.types.index'));
     }
@@ -114,7 +114,7 @@ class RoomTypeController extends Controller
             $type->delete();
         }
 
-        flashy()->message('删除成功', '#');
+        flashy()->message('success', '#');
 
         return back();
     }

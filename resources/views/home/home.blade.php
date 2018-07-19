@@ -33,8 +33,8 @@
                      data-lineheight="['40','28','28','22']"
                      data-whitespace="nowrap"
                      data-frames='[{"delay":0,"speed":1500,"frame":"0","from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;","mask":"x:0px;y:[100%];s:inherit;e:inherit;","to":"o:1;","ease":"Power2.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'
-                     style="color: #fff; font-weight: 700; font-family: 'Raleway', sans-serif;; ">WELCOME TO WATER,
-                    <span id="text_rotating">LIVE YOUR MYTH, MODERN ROOMS, GREEK CUISINE</span>
+                     style="color: #fff; font-weight: 700; font-family: 'Raleway', sans-serif;; ">WELCOME TO SUNNY BEACH
+                    {{--<span id="text_rotating">LIVE YOUR MYTH, MODERN ROOMS, GREEK CUISINE</span>--}}
                 </div>
                 <!-- LAYER NR. 2 -->
                 <div class="tp-caption tp_m_title"
@@ -150,7 +150,7 @@
                      data-fontsize="['20','20','20','15']"
                      data-lineheight="['20','20','20','15']"
                      data-frames='[{"delay":2400,"speed":1500,"frame":"0","from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;","mask":"x:0px;y:[100%];s:inherit;e:inherit;","to":"o:1;","ease":"Power2.easeInOut"}]'>
-                    <i class="fa fa-check-square-o"></i> Family Room from €89 per night
+                    <i class="fa fa-check-square-o"></i> Family Room from £89 per night
                 </div>
                 <!-- LAYER NR. 11 -->
                 <div class="tp-caption f_item"
@@ -323,7 +323,7 @@
         // });
         //
         // /**
-        //  * 界面隐藏和显示
+        //  * refresh view
         //  */
         // function refreshView() {
         //     var checkedvalue = $("input[name='target']:checked").val();

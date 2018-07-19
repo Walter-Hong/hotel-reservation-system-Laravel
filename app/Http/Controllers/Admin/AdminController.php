@@ -31,9 +31,9 @@ class AdminController extends Controller
             });
         }
 
-        if ($request->has('room_id') && ($room_id = $request->get('room_id')) !== '') {
-            $orders = Order::with(['room' => function($query) use ($room_id) {
-                return $query->where('id', $room_id);
+        if ($request->has('room_no') && ($room_no = $request->get('room_no')) !== '') {
+            $orders = Order::with(['room' => function($query) use ($room_no) {
+                return $query->where('no', $room_no);
             }])->get()->filter(function($order) {
                 return $order->room !== null;
             });

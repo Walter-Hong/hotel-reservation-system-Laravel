@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::with(['room' => function($query)
-        {
+        $orders = Order::with(['room' => function ($query) {
             return $query->with('type');
         }])->orderBy('check_in_at', 'DESC')
-           ->paginate(12);
+            ->paginate(12);
 
         return view('admin.orders.index', compact('orders'));
     }
@@ -27,17 +26,19 @@ class OrderController extends Controller
             $order->delete();
         }
 
-        flashy()->success('删除成功', '#');
+        flashy()->success('success', '#');
 
         return back();
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $order = Order::findOrFail($id);
         return view('admin.orders.edit', compact('order'));
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         $order = Order::findOrFail($id);
         $order->status = $request->get('order_status');
         $order->save();

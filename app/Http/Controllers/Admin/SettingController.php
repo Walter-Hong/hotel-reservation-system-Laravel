@@ -16,16 +16,16 @@ class SettingController extends Controller
     public function update(Request $request)
     {
         $this->validate($request, Setting::$rules, [], [
-            'company'       => '酒店名称',
-            'welcome_title' => '图片欢迎语标题',
-            'welcome_content' => '图片欢迎语内容',
-            'service_title' => '服务标题',
-            'service_title' => '服务内容',
+            'company'       => 'hotel name',
+            'welcome_title' => 'welcome slogon',
+            'welcome_content' => 'welcome info',
+            'service_title' => 'service title',
+            'service_title' => 'service info',
         ]);
 
         Setting::first()->update($request->all());
 
-        flashy()->success('更新成功', '#');
+        flashy()->success('success', '#');
 
         return back();
     }

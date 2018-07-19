@@ -13,8 +13,16 @@
                     <div class="col-md-4">
                         <article class="room">
                             <figure>
-                                <div class="price">€{{ $room->price }} <span>/ night</span></div>
-                                <a class="hover_effect h_blue h_link" href="{{ route('orders.create', ['no' => $room->no]) }}">
+                                <div class="price">
+                                    <span class="room_price_number"> £ {{ $room->price * (100 -$room->discount )/100 }}
+                                        @if($room->discount != 0)
+                                            <span style="text-decoration:line-through !important;">{{ $room->price}}</span>
+                                        @endif
+                                        </span>
+                                    <span>/ night </span>
+                                </div>
+                                <a class="hover_effect h_blue h_link"
+                                   href="{{ route('orders.create', ['no' => $room->no]) }}">
                                     <img src="{{ asset($room->image) }}" class="img-responsive"
                                          alt="Image">
                                 </a>

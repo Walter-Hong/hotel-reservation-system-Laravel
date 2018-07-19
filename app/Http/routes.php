@@ -12,6 +12,7 @@ Route::group(['middleware' => 'web'], function () use ($admin) {
     Route::get('/rooms', ['as' => 'rooms.index', 'uses' => 'RoomController@index']);
     Route::get('/rooms/search', ['as' => 'rooms.search', 'uses' => 'RoomController@search']);
 
+    Route::get('/orders', ['as' => 'orders.index', 'uses' => 'OrderController@index']);
     Route::get('/orders/create/{no}', ['as' => 'orders.create', 'uses' => 'OrderController@create']);
     Route::post('/orders/store', ['as' => 'orders.store', 'uses' => 'OrderController@store']);
 

@@ -46,14 +46,14 @@ class RoomController extends Controller
             'no' => 'required|unique:rooms,no',
             'room_type_id' => 'required|exists:room_types,id',
             'price' => 'required|integer',
-            'discount' => 'numeric|between:0,10',
+            'discount' => 'numeric|between:0,100',
             'image' => 'required|image'
         ], [], [
-            'no' => '房间号',
-            'room_type_id' => '房间类型',
-            'price' => '价格',
-            'discount' => '折扣',
-            'image' => '图片'
+            'no' => 'room no',
+            'room_type_id' => 'room type',
+            'price' => 'price',
+            'discount' => 'discount',
+            'image' => 'pic'
         ]);
 
         $room = new Room;
@@ -61,6 +61,7 @@ class RoomController extends Controller
         $room->room_type_id = $request->get('room_type_id');
         $room->price        = $request->get('price');
         $room->discount     = $request->get('discount');
+        $room->status     = $request->get('status');
 
         $image = $request->file('image');
         $path = 'img/rooms/' . str_random(10) . $image->getClientOriginalName();
@@ -72,7 +73,7 @@ class RoomController extends Controller
         $room->image = $path;
         $room->save();
 
-        flashy()->success('添加成功', '#');
+        flashy()->success('add room success', '#');
 
         return redirect(route('admin.rooms.index'));
     }
@@ -115,14 +116,14 @@ class RoomController extends Controller
             'no' => 'required|unique:rooms,no,' . $id,
             'room_type_id' => 'required|exists:room_types,id',
             'price' => 'required|integer',
-            'discount' => 'numeric|between:0,10',
+            'discount' => 'numeric|between:0,100',
             'image' => 'image'
         ], [], [
             'quantity' => 'quantity',
-            'room_type_id' => '房间类型',
-            'price' => '价格',
-            'discount' => '折扣',
-            'image' => '图片'
+            'room_type_id' => 'room type',
+            'price' => 'price',
+            'discount' => 'discount',
+            'image' => 'pic'
         ]);
 
         $room = Room::findOrFail($id);
@@ -130,6 +131,8 @@ class RoomController extends Controller
         $room->room_type_id = $request->get('room_type_id');
         $room->price        = $request->get('price');
         $room->discount     = $request->get('discount');
+        $room->status     = $request->get('status');
+        $room->info     = $request->get('info');
 
         if ($image = $request->file('image')) {
             $path = 'img/rooms/' . str_random(10) . $image->getClientOriginalName();
@@ -143,7 +146,7 @@ class RoomController extends Controller
 
         $room->save();
 
-        flashy()->success('修改成功', '#');
+        flashy()->success('success', '#');
 
         return redirect(route('admin.rooms.index'));
     }
@@ -162,7 +165,7 @@ class RoomController extends Controller
             $room->delete();
         }
 
-        flashy()->success('删除成功', '#');
+        flashy()->success('success', '#');
 
         return back();
     }

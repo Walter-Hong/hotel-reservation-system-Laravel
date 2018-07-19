@@ -14,7 +14,7 @@ class PageController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth');
+//         $this->middleware('auth');
     }
 
     /**
@@ -25,8 +25,7 @@ class PageController extends Controller
     public function index()
     {
         $types = RoomType::query()->get();
-        $rooms = Room::with('type')->paginate(18);
-
+        $rooms = Room::with('type')->where('status', 1)->paginate(18);
         return view('home.home', compact('rooms', 'types'));
     }
 }

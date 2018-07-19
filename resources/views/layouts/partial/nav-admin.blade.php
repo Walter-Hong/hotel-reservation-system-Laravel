@@ -15,11 +15,8 @@
     </div>
 
     <ul class="nav navbar-nav">
-        <li>
+        <li class="">
             <a href="{{ route('rooms.index') }}">Room List</a>
-        </li>
-        <li>
-            <a href="{{ route('rooms.search') }}">Search</a>
         </li>
     </ul>
 
@@ -46,10 +43,10 @@
             </li>
         @else
             <li class="{{ isActive('login') }}">
-                <a href="{{ url('login') }}">登录</a>
+                <a href="{{ url('login') }}">login</a>
             </li>
             <li class="{{ isActive('register') }}">
-                <a href="{{ url('register') }}">注册</a>
+                <a href="{{ url('register') }}">register</a>
             </li>
         @endif
     </ul>

@@ -8,7 +8,7 @@ Validator::extend('current_password', function($attribute, $value, $parameters) 
 }, 'password invalid');
 
 Validator::extend('phone', function($attribute, $value, $parameters) {
-    return preg_match('/^((13[0-9])|(15[^4,\\D])|(18[0,2,5-9]))\\d{8}$/', $value);
+    return preg_match('/^\d{10}$/', $value);
 }, 'phone invalid');
 
 Validator::extend('live_half_month_and_not_conflict', function($attribute, $value, $parameters, $validator) {

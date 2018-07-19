@@ -10,17 +10,17 @@
             <div class="col-md-1">
                 <form action="#" id="search-form">
                     <div class="form-group">
-                        <label for="low">最低价</label>
+                        <label for="low">minimum price</label>
                         <input type="number" class="form-control" id="low" name="low">
                     </div>
                     <div class="form-group">
-                        <label for="high">最高价</label>
+                        <label for="high">highest price</label>
                         <input type="number" class="form-control" id="high" name="high">
                     </div>
                     <div class="form-group">
                         <!-- Discount field -->
                         <div class="form-group">
-                            <label for="discount">折扣</label>
+                            <label for="discount">discount</label>
                             <input type="number" class="form-control" id="discount" name="discount">
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                 </form>
             </div>
             <div class="col-md-11">
-                @include('rooms.partial.room')
+                @include('rooms.partial.room2')
             </div>
         </div>
     </div>
@@ -45,7 +45,7 @@
                     if (curr.name == 'discount' && curr.value == '') {
                         return query;
                     } else {
-                        return query += curr.name + '=' + curr.value + '&';
+                        return query + curr.name + '=' + curr.value + '&';
                     }
                 }, '?').slice(0, -1);
 

@@ -1,7 +1,7 @@
 @extends('admin.app')
 
 @section('title')
-    后台管理-房间管理
+    management-room management
 @stop
 
 @section('page')
@@ -20,6 +20,7 @@
                 <th>type</th>
                 <th>price / night</th>
                 <th>discount</th>
+                <th>status</th>
                 <th>modify</th>
                 <th>delete</th>
                 <th>book</th>
@@ -33,7 +34,8 @@
                     <td><img src="{{ asset($room->image) }}" width="30"></td>
                     <td>{{ $room->type->name }}</td>
                     <td>{{ $room->price }}</td>
-                    <td>{{ $room->discount }} 折</td>
+                    <td>{{ $room->discount }} discount</td>
+                    <td> @if($room->status==0) reserved @elseif($room->status==1) available @endif</td>
                     <td><a href="{{ route('admin.rooms.edit', ['id' => $room->id]) }}" class="btn btn-primary btn-xs"><i
                                     class="fa fa-pencil"></i></a></td>
                     <td>
@@ -41,7 +43,7 @@
                               method="post">
                             {!! csrf_field() !!}
                             <input type="hidden" name="_method" value="DELETE">
-                            <button class="btn btn-sm btn-danger btn-xs" onclick="return confirm('确定删除?')"><i
+                            <button class="btn btn-sm btn-danger btn-xs" onclick="return confirm('delete?')"><i
                                         class="fa fa-remove"></i></button>
                         </form>
                     </td>

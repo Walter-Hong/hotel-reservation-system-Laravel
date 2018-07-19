@@ -17,7 +17,7 @@ class AuthController extends Controller
     |
     | This controller handles the registration of new users, as well as the
     | authentication of existing users. By default, this controller uses
-    | a simple trait to add these behaviors. Why don't you explore it?
+    | a simple trait to add these behaviors. 
     |
     */
 
@@ -53,9 +53,9 @@ class AuthController extends Controller
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
         ], [], [
-            'name' => '用户名',
-            'email' => '邮箱',
-            'password' => '密码'
+            'name' => 'name',
+            'email' => 'email',
+            'password' => 'password'
         ]);
     }
 

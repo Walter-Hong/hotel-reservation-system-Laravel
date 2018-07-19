@@ -28,7 +28,7 @@
                 <form action="{{ route('profile.update') }}" method="POST">
                     {!! csrf_field() !!}
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                        <label for="name">用户名 <i class="required">*</i></label>
+                        <label for="name">username <i class="required">*</i></label>
                         <input type="text" class="form-control" id="name" name="name"
                                value="{{ old('name') ?: Auth::user()->name }}">
 
@@ -46,7 +46,7 @@
 
                     <!-- Old_password field -->
                     <div class="form-group{{ $errors->has('old_password') ? ' has-error' : '' }}">
-                        <label for="old_password">当前密码</label>
+                        <label for="old_password">current password</label>
                         <input type="password" class="form-control" name="old_password" id="old_password">
 
                         @if ($errors->has('old_password'))
@@ -57,7 +57,7 @@
                     </div>
 
                     <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                        <label for="password">新密码</label>
+                        <label for="password">new password</label>
                         <input type="password" class="form-control" id="password" name="password">
                         @if ($errors->has('password'))
                             <span class="help-block">
@@ -68,12 +68,12 @@
 
                     <!-- Password_confirmation field -->
                     <div class="form-group">
-                        <label for="password_confirmation">确认密码</label>
+                        <label for="password_confirmation">repassword</label>
                         <input type="password" class="form-control" name="password_confirmation"
                                id="password_confirmation">
                     </div>
 
-                    <input type="submit" class="btn btn-danger" value="确认">
+                    <input type="submit" class="btn btn-danger" value="confirm">
                 </form>
             </div>
         </div>

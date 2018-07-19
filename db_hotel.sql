@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2018-03-12 23:13:49
+Date: 2018-03-16 01:03:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -42,20 +42,24 @@ CREATE TABLE `orders` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `room_no` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `phone` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
-  `name` varchar(18) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `check_in_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `check_out_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `status` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8_unicode_ci DEFAULT '1',
+  `user_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `orders_room_no_foreign` (`room_no`),
-  CONSTRAINT `orders_room_no_foreign` FOREIGN KEY (`room_no`) REFERENCES `rooms` (`no`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  KEY `orders_users_id_foreign` (`user_id`),
+  CONSTRAINT `orders_room_no_foreign` FOREIGN KEY (`room_no`) REFERENCES `rooms` (`no`) ON DELETE CASCADE,
+  CONSTRAINT `orders_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
+INSERT INTO `orders` VALUES ('8', '103', '15698745654', 'jack', '2018-03-14 22:45:19', '2018-03-16 00:00:00', '2018-03-14 20:23:43', '2018-03-14 20:23:43', '1', '3');
 
 -- ----------------------------
 -- Table structure for password_resets
@@ -86,19 +90,20 @@ CREATE TABLE `rooms` (
   `image` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'img/rooms/default.png',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `status` int(1) unsigned DEFAULT '1',
+  `info` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `rooms_no_index` (`no`),
   KEY `rooms_room_type_id_index` (`room_type_id`),
   CONSTRAINT `rooms_room_type_id_foreign` FOREIGN KEY (`room_type_id`) REFERENCES `room_types` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of rooms
 -- ----------------------------
-INSERT INTO `rooms` VALUES ('1', '103', '1', '89', '9.00', 'img/rooms/single-room.jpg', null, null);
-INSERT INTO `rooms` VALUES ('2', '104', '2', '129', '8.00', 'img/rooms/double-room.jpg', null, null);
-INSERT INTO `rooms` VALUES ('3', '105', '3', '189', '8.00', 'img/rooms/king.jpg', null, null);
-INSERT INTO `rooms` VALUES ('4', '109', '3', '189', '8.00', 'img/rooms/king.jpg', null, null);
+INSERT INTO `rooms` VALUES ('1', '103', '1', '89', '20.00', 'img/rooms/single-room.jpg', null, '2018-03-16 00:32:31', '1', 'a simple room...');
+INSERT INTO `rooms` VALUES ('2', '104', '2', '129', '0.00', 'img/rooms/double-room.jpg', null, '2018-03-14 23:37:12', '1', 'provide tv');
+INSERT INTO `rooms` VALUES ('3', '105', '3', '189', '0.00', 'img/rooms/king.jpg', null, '2018-03-14 23:37:17', '1', 'big big room  provide wifi  tv');
 
 -- ----------------------------
 -- Table structure for room_types
@@ -110,7 +115,7 @@ CREATE TABLE `room_types` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of room_types
@@ -164,4 +169,4 @@ CREATE TABLE `users` (
 -- Records of users
 -- ----------------------------
 INSERT INTO `users` VALUES ('3', 'tttttt', 'ttt@qq.com', '$2y$10$yysE9e9.Q6L9xjah3lqzx.SAT76pNdKpz45FeFQbpYhUWh7zBoUje', '0', 'y4FKxQ2Rp48ZN5v4FM3oadCXwq3bobciepONN3VUZoEvy3yg9drkRDw8fS5r', '2018-03-12 08:30:56', '2018-03-12 08:31:14');
-INSERT INTO `users` VALUES ('4', 'admin', 'admin@admin.com', '$2y$10$Zraq62QUmDMLLBnA.Kbf3u4ZgprTD6sYWyeX8o2tH7ZCxW/d2ZeXi', '1', null, '2018-03-12 08:31:55', '2018-03-12 08:31:55');
+INSERT INTO `users` VALUES ('4', 'admin', 'admin@admin.com', '$2y$10$Zraq62QUmDMLLBnA.Kbf3u4ZgprTD6sYWyeX8o2tH7ZCxW/d2ZeXi', '1', '8BpZwKgv7aAwEV9MzPrZkcx15YBl9ZFSt9OlAyerP8FWYASVtaamp3DIR18Y', '2018-03-12 08:31:55', '2018-03-14 22:38:00');

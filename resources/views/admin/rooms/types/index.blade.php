@@ -1,7 +1,7 @@
 @extends('admin.app')
 
 @section('title')
-    后台管理-房间分类
+     managemen-room type
 @stop
 
 @section('page')
@@ -16,10 +16,10 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>名称</th>
-                    <th>房间</th>
-                    <th>修改</th>
-                    <th>删除</th>
+                    <th>name</th>
+                    <th>number</th>
+                    <th>edit</th>
+                    <th>delete</th>
                 </tr>
                 </thead>
 
@@ -28,7 +28,7 @@
                     <tr>
                         <td>{{ $type->id }}</td>
                         <td>{{ $type->name }}</td>
-                        <td>{{ count($type->rooms) }} 间</td>
+                        <td>{{ count($type->rooms) }}</td>
                         <td>
                             <a href="{{ route('admin.rooms.types.edit', ['id' => $type->id]) }}"
                                class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
@@ -38,7 +38,7 @@
                                   style='display: inline' method="post">
                                 {!! csrf_field() !!}
                                 <input type="hidden" name="_method" value="DELETE">
-                                <button class="btn btn-sm btn-danger btn-xs" onclick="return confirm('确定删除?')"><i
+                                <button class="btn btn-sm btn-danger btn-xs" onclick="return confirm('delete?')"><i
                                             class="fa fa-remove"></i></button>
                             </form>
                         </td>
